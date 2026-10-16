@@ -1,0 +1,41 @@
+  - name: maven setup 
+    include_role:
+      name: common
+      tasks_from: maven
+  
+  - name: app setup 
+    include_role:
+      name: common 
+      tasks_from: app-setup 
+      
+  - name: systemd setup 
+    include_role:
+      name: common 
+      tasks_from: systemd-setup
+
+  - name: install mysql clinet 
+    ansible.builtin.dnf:
+      name: mysql  
+      state: present 
+
+  
+  - name: Load data into MySQL database
+    community.mysql.mysql_db:
+      name: all
+      state: import
+      target: "{{ item }}"
+      login_host: mysql.srinunayak.online
+      login_user: root
+      login_password: RoboShop@1
+    loop:
+    - /app/db/schema.sql
+    - /app/db/app-user.sql 
+    - /app/db/master-data.sql
+
+  - name: restart the shipping server 
+    ansible.builtin.service:
+      name: shipping
+      state: restarted
+  
+  
+  
