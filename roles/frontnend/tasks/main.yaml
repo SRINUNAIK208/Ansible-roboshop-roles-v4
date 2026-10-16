@@ -21,8 +21,8 @@
 
   - name: downloadthe frontend code 
     ansible.builtin.get_url:
-      src: https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
-      dest: /tmp/frontend.zip 
+      src: "https://roboshop-artifacts.s3.amazonaws.com/{{ component }}-v3.zip"
+      dest: "/tmp/{{ component }}.zip"
 
   - name: create directory
     ansible.builtin.file:
@@ -31,7 +31,7 @@
 
   - name: unzip the frontend code 
     ansible.builtin.unarchive:
-       src: /tmp/frontend.zip 
+       src: "/tmp/{{ component }}.zip"
        dest: /usr/share/nginx/html 
        remote_src: yes 
 
