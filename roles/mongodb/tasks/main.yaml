@@ -1,7 +1,4 @@
-- name: "configure {{ component }} server"
-  hosts: "{{ component }}"
-  become: yes 
-  tasks:
+
   - name: "set {{ component }} repo"
     ansible.builtin.copy:
       src: mongo.repo 
