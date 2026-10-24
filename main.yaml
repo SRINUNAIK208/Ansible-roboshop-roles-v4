@@ -1,7 +1,9 @@
 - name: "configure {{ component }} server"
-  hosts: "{{ component }}"
-  become: yes 
-  vars_files:
-  - vault/secrets.yaml
+  # hosts: "{{ component }}"
+  hosts: localhost
+  connections: local
+  # become: yes 
+  # vars_files:
+  # - vault/secrets.yaml
   roles:
   - "{{ component }}"
