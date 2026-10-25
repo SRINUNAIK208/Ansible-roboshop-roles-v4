@@ -25,7 +25,7 @@
       state: present 
 
   - name: check the catalogue database 
-    ansible.builtin.shell: mongosh --host mongodb.srinunayak.online --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+    ansible.builtin.shell: mongosh --host mongodb.backend-{{ env }}.srinunayak.online --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
     register: catalogue_output
 
   - name: print the catalogue_output
