@@ -24,17 +24,17 @@
       name: mongodb-mongosh 
       state: present 
 
-  # - name: check the catalogue database 
-  #   ansible.builtin.shell: mongosh --host mongodb.backend-{{ env }}.srinunayak.online --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
-  #   register: catalogue_output
+  - name: check the catalogue database 
+    ansible.builtin.shell: mongosh --host mongodb-{{ env }}.srinunayak.online --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+    register: catalogue_output
 
-  # - name: print the catalogue_output
-  #   ansible.builtin.debug:
-  #     msg: "{{ catalogue_output }}"
+  - name: print the catalogue_output
+    ansible.builtin.debug:
+      msg: "{{ catalogue_output }}"
 
   - name: load mongodb data 
     ansible.builtin.shell: mongosh --host mongodb-{{ env }}.srinunayak.online </app/db/master-data.js
-    # when: catalogue_output.stdout | int == -1
+    when: catalogue_output.stdout | int == -1
 
 
   # - name: deployment
