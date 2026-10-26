@@ -24,7 +24,7 @@
       name: all
       state: import
       target: "{{ item }}"
-      login_host: mysql.srinunayak.online
+      login_host: mysql-{{ env }}.srinunayak.online
       login_user: root
       login_password: RoboShop@1
     loop:
